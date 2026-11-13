@@ -247,5 +247,41 @@ footer img{height:30px;margin:0 auto 14px;opacity:.85}
 
 <footer><div class="wrap"><img src="img/logo_horizontal.png" alt="Окна Хаус">Пластиковые окна под ключ · Москва и МО · © 2026</div></footer>
 <div class="mbar"><a class="btn btn-gold" href="tel:+79911291862">Позвонить · +7 991 129-18-62</a></div>
+<div id="cm" role="dialog" aria-modal="true" aria-label="Связаться с нами"><div class="cmb">
+<button class="cmx" aria-label="Закрыть">×</button>
+<div class="cmk">Звоните или пишите</div>
+<a class="cmn" href="tel:+79911291862">+7 991 129-18-62</a>
+<button class="cmc btn btn-gold" type="button">Скопировать номер</button>
+<a class="cmv" href="https://vk.me/okna.house" target="_blank" rel="noopener">Написать в ВКонтакте</a>
+</div></div>
+<style>
+#cm{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:60;padding:16px}
+#cm.on{display:flex}
+#cm .cmb{position:relative;background:#1A1816;color:#ECE6DC;border:1px solid #BB976F;border-radius:14px;padding:36px 28px 26px;width:100%;max-width:400px;text-align:center}
+#cm .cmx{position:absolute;top:8px;right:12px;background:none;border:0;color:#ECE6DC;font-size:28px;cursor:pointer;line-height:1}
+#cm .cmk{font-size:13px;letter-spacing:.15em;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+#cm .cmn{display:block;font-size:28px;font-weight:700;color:#BB976F;text-decoration:none;margin-bottom:20px;white-space:nowrap}
+#cm .cmc{width:100%;margin-bottom:12px;cursor:pointer;border:0;font:inherit}
+#cm .cmv{display:block;padding:13px;border:1px solid #BB976F;border-radius:10px;color:#ECE6DC;text-decoration:none;font-weight:600}
+#cm .cmv:hover{background:rgba(255,255,255,.06)}
+#cm .cmh{margin-top:14px;font-size:13px;opacity:.6}
+</style>
+<script>
+(function(){
+  var desk=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var cm=document.getElementById('cm'), cc=cm.querySelector('.cmc');
+  function close(){cm.classList.remove('on')}
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+    if(a.closest('#cm'))return;
+    a.addEventListener('click',function(e){if(!desk)return;e.preventDefault();cc.textContent='Скопировать номер';cm.classList.add('on')});
+  });
+  cm.addEventListener('click',function(e){if(e.target===cm||e.target.classList.contains('cmx'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  cc.addEventListener('click',function(){
+    var t='+79911291862';
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){cc.textContent='Номер скопирован ✓'},function(){cc.textContent='+7 991 129-18-62'});
+  });
+})();
+</script>
 </body>
 </html>
